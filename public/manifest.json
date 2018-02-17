@@ -1,0 +1,23 @@
+{
+  "name": "cryptolive",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Realtime crypto currency price on every new tab",
+  "homepage_url": "https://saasproductguy.com",
+  "offline_enabled": false,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "chrome_url_overrides": {
+      "newtab": "src/override/override.html"
+  },
+  "short_name": "cryptolive",
+  "permissions": [
+    "tabs",
+    "https://api.coinmarketcap.com/*"
+  ]
+}

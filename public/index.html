@@ -1,0 +1,86 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="app">
+	<table class="table is-striped is-fullwidth">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Symbol</th>
+				<th>Qty</th>
+				<th>BTC Price</th>
+				<th>USD Price</th>
+				<th>USD Value</th>
+				<!-- <th>BTC Value</th> -->
+				<th>1 Hr</th>
+				<th>24 Hr</th>
+				<th>1 Week</th>
+				<th>Exchange</th>
+				<th>{{totalUSDBalance}}</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr  v-for="coin in filterCoins" :key="coin.name">	
+			  <td>
+			      {{coin.name}}
+				</td>
+				<td>
+				   {{coin.symbol}}
+				</td>
+				<td>
+					{{coin.qty}}
+				</td>
+				<td>
+					${{coin.price_btc}}
+				</td>
+				<td>
+				   ${{coin.price_usd}}
+				</td>
+				<td is-one-quarter>
+					${{coin.usdValue}}
+				</td>
+				<!--
+				<td is-one-quarter>
+					${{coin.btcValue}}
+				</td>  -->
+				<td is-one-quarter>
+						<span v-bind:class="{ 'tag is-success': (coin.percent_change_1h>=0),'tag is-danger': (coin.percent_change_1h<0) }">
+								&nbsp;  {{coin.percent_change_1h}}%
+						</span>
+					</td>
+				<td is-two-quarter>
+						<span v-bind:class="{ 'tag is-success': (coin.percent_change_24h>=0),'tag is-danger': (coin.percent_change_24h<0) }">
+								&nbsp;  {{coin.percent_change_24h}}%
+						</span>
+					</td>
+				<td is-one-quarter>
+						<span v-bind:class="{  'tag is-success': (coin.percent_change_7d>=0),'tag is-danger': (coin.percent_change_7d<0) }">
+							&nbsp;  {{coin.percent_change_7d}}%
+						</span>
+				</td>
+				<td is-one-quarter>
+						<span class="tag is-light">
+							&nbsp;  {{coin.exchange}}
+						</span>
+				</td>
+				<td is-one-quarter>
+					<input type="text"  maxlength="6" size="6">
+					<a class="button is-success">Buy</a>
+					<a class="button is-danger">Sell</a>
+				</td>
+		</tr>
+		</tbody>
+	</table>
+	</div>
+	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/src/bg/cryptoprice.js"></script>
+</body>
+</html>
